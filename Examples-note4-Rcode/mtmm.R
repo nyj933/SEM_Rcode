@@ -1,0 +1,121 @@
+
+cor2cov <- function(R, S) {
+  sweep(sweep(R, 1, S, "*"), 2, S, "*")
+}
+lower_cor <- '
+1.000
+0.290 1.000
+0.372 0.478 1.000
+0.587 0.238 0.209 1.000
+0.201 0.586 0.126 0.213 1.000
+0.218 0.281 0.681 0.195 0.096 1.000
+0.557 0.228 0.195 0.664 0.242 0.232 1.000
+0.196 0.644 0.146 0.261 0.641 0.248 0.383 1.000
+0.219 0.241 0.676 0.290 0.168 0.749 0.361 0.342 1.000
+ '
+std <- c(3.61, 3.66, 3.59, 2.94, 3.03, 2.85, 2.22, 2.42, 2.04)
+
+cormat <- getCov(lower_cor,names = c("PARI", "SZTI", "SZDI", "PARC", 
+                                     "SZTC", "SZDC", "PARO", "SZTO", "SZDO"))
+
+covmat <- cor2cov(cormat,std)
+####### mtmm1-brown:
+##MTMM - CFA SPECIFICATION correlated traits and uncorrelated methods
+model <- '
+
+  # Define the measurement model for the observed variables
+  PARANOID =~ PARI + PARC + PARO
+  SCHIZOTYP =~ SZTI + SZTC + SZTO
+  SCHIZOID =~ SZDI + SZDC + SZDO
+  
+  INVENTRY =~ PARI + SZTI + SZDI
+  INTERVW =~ PARC + SZTC + SZDC
+  OBSERVE =~ PARO + SZTO + SZDO
+
+  # Specify the uncorrelated latent variables
+  PARANOID ~~ 0*INVENTRY
+  PARANOID ~~ 0*INTERVW
+  PARANOID ~~ 0*OBSERVE
+  
+  SCHIZOTYP ~~ 0*INVENTRY
+  SCHIZOTYP ~~ 0*INTERVW
+  SCHIZOTYP ~~ 0*OBSERVE
+  
+  SCHIZOID ~~ 0*INVENTRY
+  SCHIZOID ~~ 0*INTERVW
+  SCHIZOID ~~ 0*OBSERVE
+  
+  INVENTRY ~~ 0*INTERVW
+  INTERVW ~~ 0*OBSERVE
+  INVENTRY ~~ 0*OBSERVE
+'
+
+fit <- lavaan::cfa(model, sample.cov = covmat, sample.nobs = 500, 
+           std.lv = T,likelihood = "wishart")
+
+# Print the summary of the model
+summary(fit,standardized=TRUE,rsquare=T)
+
+#### MTMM - CFA SPECIFICATION correlated traits and methods
+model <- '
+
+  # Define the measurement model for the observed variables
+  PARANOID =~ PARI + PARC + PARO
+  SCHIZOTYP =~ SZTI + SZTC + SZTO
+  SCHIZOID =~ SZDI + SZDC 
+  
+  INVENTRY =~ PARI + SZTI + SZDI
+  INTERVW =~ PARC + SZTC + SZDC
+  OBSERVE =~ PARO + SZTO 
+
+  # Specify the uncorrelated latent variables
+  PARANOID ~~ 0*INVENTRY
+  PARANOID ~~ 0*INTERVW
+  PARANOID ~~ 0*OBSERVE
+  
+  SCHIZOTYP ~~ 0*INVENTRY
+  SCHIZOTYP ~~ 0*INTERVW
+  SCHIZOTYP ~~ 0*OBSERVE
+  
+  SCHIZOID ~~ 0*INVENTRY
+  SCHIZOID ~~ 0*INTERVW
+  SCHIZOID ~~ 0*OBSERVE
+'
+
+fit <- lavaan::cfa(model, sample.cov = covmat, sample.nobs = 500, 
+                   std.lv = T)
+
+# Print the summary of the model
+summary(fit,standardized=TRUE,rsquare=T)
+
+
+###MTMM - CFA SPECIFICATION correlated traits and uncorrelated methods
+
+model3 <- '
+
+  # Define the measurement model for the observed variables
+  PARANOID =~ PARI + PARC + PARO
+  SCHIZOTYP =~ SZTI + SZTC + SZTO
+  SCHIZOID =~ SZDI + SZDC + SZDO
+  
+  PARI ~~ SZTI 
+  PARI ~~ SZDI 
+  SZDI ~~ SZTI
+  
+  PARC ~~ SZTC
+  PARC ~~ SZDC 
+  SZDC ~~ SZTC 
+  
+  PARO ~~ SZTO 
+  PARO ~~ SZDO 
+  SZDO ~~ SZTO
+
+
+'
+
+fit <- lavaan::cfa(model3, sample.cov = cormat, sample.nobs = 500, 
+                   std.lv = T,likelihood = "wishart")
+summary(fit,standardized=TRUE,rsquare=T)
+
+
+
