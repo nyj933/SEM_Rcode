@@ -1,3 +1,5 @@
+##Confirmatory Factor Analysis Model for Sympathy and Anger
+
 library(lavaan)
 
 lower <- '
@@ -11,7 +13,10 @@ lower <- '
 name <- paste("X", seq(1:6), sep = "")
 cormat <- getCov(lower,names=c(name))
 
+
+###### Sympathyanger
 model <- ' 
+     #### measurement models
           Symp =~ X1 + X2 + X3
           Anger =~ X4 + X5 + X6
 
@@ -19,7 +24,6 @@ model <- '
 fit <- lavaan::cfa(model, sample.cov = cormat,sample.nobs = 138,
                    likelihood = "wishart", std.lv=T)
 summary(fit,rsquare=T,standardized=TRUE)
-
 
 
 
