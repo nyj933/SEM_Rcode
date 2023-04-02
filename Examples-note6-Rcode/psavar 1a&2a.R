@@ -1,4 +1,4 @@
-
+library(lavaan)
 psavar = read.csv("~/Downloads/Examples-note6/psavar.csv")
 psavar = psavar[,c(1:6)]
 

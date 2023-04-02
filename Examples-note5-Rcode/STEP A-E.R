@@ -1,4 +1,4 @@
-
+library(lavaan)
 lower_BA <- '
              281.349
              184.219 182.821
@@ -38,7 +38,6 @@ semPaths(
   whatLabels = "par"
 )
 
-#### The intercepts in lavaan is a little greater than the intercepts in liseral
 
 ############ STEPB
 
@@ -52,8 +51,6 @@ fit_B <- lavaan::cfa(model_B, sample.cov = list(cov_BA,cov_BNA), sample.nobs = c
                      group.equal = c("regressions"))
 summary(fit_B, standardized=TRUE,rsquare=T)
 
-####### Intercepts and variance
-
 ######### STEPC
 
 model_C <- '
@@ -66,8 +63,6 @@ fit_C <- lavaan::cfa(model_C, sample.cov = list(cov_BA,cov_BNA), sample.nobs = c
                      sample.mean = list(mean_BA,mean_BNA),likelihood = "wishart",
                      group.equal = c("regressions"))
 summary(fit_C, standardized=TRUE,rsquare=T)
-
-#### Intercepts:, Covariances:, Variances:
 
 ######### STEPD
 
@@ -97,7 +92,6 @@ fit_E <- lavaan::cfa(model_E, sample.cov = list(cov_BA,cov_BNA), sample.nobs = c
 
 summary(fit_E, standardized=TRUE,rsquare=T)
 
-##### Variances, Covariances:
 
 
 

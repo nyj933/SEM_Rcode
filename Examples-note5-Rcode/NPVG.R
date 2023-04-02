@@ -1,5 +1,5 @@
-
-npvg = readLines("~/Downloads/Examples-note5/NPVG(R).dat")
+library(lavaan)
+npvg = read_lines("~/Downloads/Examples-note5/NPVG(R).dat")
 
 readCorrMatrix <- function(data){
   j=0
@@ -66,11 +66,20 @@ model <- '
            Verbal =~ GENINFO + SENTCOM + WORDCLAS
            Memory =~ FIGREC + OBJNUM + NUMFIG
            
+           Space ~~ Space
+           Verbal ~~ Verbal
+           Memory ~~ Memory
+           
+           Space ~~ Verbal
+           Verbal ~~ Memory
+           Memory ~~ Space
+           
+           
   
 '
 
 fit <- lavaan::cfa(model, sample.cov = covmat, sample.nobs = c(77,79,74,71),
-             sample.mean = mean,likelihood = "wishart",
+             sample.mean = mean,likelihood = "wishart", 
              group.equal = c("residuals",
                              "intercepts",
                              "loadings"))

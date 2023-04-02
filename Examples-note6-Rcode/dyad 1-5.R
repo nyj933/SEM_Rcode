@@ -1,4 +1,4 @@
-
+library(lavaan)
 dyad = read.csv("~/Downloads/Examples-note6/DYAD.csv")
 dyad = dyad[,c(1:10)]
 dyad[dyad==-9] = NA

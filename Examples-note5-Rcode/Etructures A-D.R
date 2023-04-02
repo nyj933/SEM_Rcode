@@ -1,4 +1,4 @@
-
+library(lavaan)
 
 ######## EtructureA Factor Loadings, Factor Correlation, Error Variances Invariant
 
@@ -41,7 +41,7 @@ summary(fit_B,standardized=TRUE,rsquare=T)
 ######### EtructureC Factor Correlation Invariant
 fit_C <- lavaan::cfa(model, sample.cov=list(covmat1,covmat2),
                      sample.nobs=c(865,900),std.lv=T,likelihood = "wishart",
-                     group.equal = c("lv.variances", "lv.covariances"))
+                     group.equal = c("lv.covariances"))
 
 summary(fit_C,standardized=TRUE,rsquare=T)
 

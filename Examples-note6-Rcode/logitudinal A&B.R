@@ -1,6 +1,6 @@
 
-##### longitudinalA
-
+##### longitudinalA: 
+library(lavaan)
 dat = readLines("~/Downloads/Examples-note6/longitudinal.COR")
 
 cormat = getCov(dat[1:12], names = c("MATH9", "SCI9", "SS9", "READ9",
@@ -31,7 +31,7 @@ fit_A <- lavaan::sem(model_A, sample.cov = cormat,
 
 summary(fit_A, standardized=TRUE,rsquare=T,nd=4)
 
-##if don't set "SCATV9 ~~ SCATV7"
+##if don't add "SCATV9 ~~ SCATV7"
 ##lavaan WARNING: covariance matrix of latent variables is not positive definite;
 ##highly correlated factors 
 
@@ -57,9 +57,6 @@ model_B <- '
             SCATV9 ~~ SCATV7 
             SCATQ9 ~~ SCATQ7
             
-            
-
-
 '
 
 fit_B <- lavaan::cfa(model_B, sample.cov = cormat,
@@ -68,6 +65,5 @@ fit_B <- lavaan::cfa(model_B, sample.cov = cormat,
 
 summary(fit_B, standardized=TRUE,rsquare=T)
 
-lavInspect(fit_B,"cov.lv")
 
 
