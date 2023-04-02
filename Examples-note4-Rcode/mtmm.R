@@ -1,24 +1,17 @@
 
+library(lavaan)
 cor2cov <- function(R, S) {
   sweep(sweep(R, 1, S, "*"), 2, S, "*")
 }
-lower_cor <- '
-1.000
-0.290 1.000
-0.372 0.478 1.000
-0.587 0.238 0.209 1.000
-0.201 0.586 0.126 0.213 1.000
-0.218 0.281 0.681 0.195 0.096 1.000
-0.557 0.228 0.195 0.664 0.242 0.232 1.000
-0.196 0.644 0.146 0.261 0.641 0.248 0.383 1.000
-0.219 0.241 0.676 0.290 0.168 0.749 0.361 0.342 1.000
- '
+
+mtmm <- readLines("~/Downloads/Examples-note4/mtmm.cm")
 std <- c(3.61, 3.66, 3.59, 2.94, 3.03, 2.85, 2.22, 2.42, 2.04)
 
-cormat <- getCov(lower_cor,names = c("PARI", "SZTI", "SZDI", "PARC", 
+cormat <- getCov(mtmm[c(1:9)],names = c("PARI", "SZTI", "SZDI", "PARC", 
                                      "SZTC", "SZDC", "PARO", "SZTO", "SZDO"))
 
 covmat <- cor2cov(cormat,std)
+
 ####### mtmm1-brown:
 ##MTMM - CFA SPECIFICATION correlated traits and uncorrelated methods
 model <- '
@@ -57,6 +50,7 @@ fit <- lavaan::cfa(model, sample.cov = covmat, sample.nobs = 500,
 summary(fit,standardized=TRUE,rsquare=T)
 
 #### MTMM - CFA SPECIFICATION correlated traits and methods
+#### mtmm-browm
 model <- '
 
   # Define the measurement model for the observed variables
@@ -90,7 +84,7 @@ summary(fit,standardized=TRUE,rsquare=T)
 
 
 ###MTMM - CFA SPECIFICATION correlated traits and uncorrelated methods
-
+### mtmmcfa-brown
 model3 <- '
 
   # Define the measurement model for the observed variables

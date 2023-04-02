@@ -14,7 +14,7 @@ model_A <- '
            Bfambitn ~ Reambitn + RESOCIEC + BFSOCIEC + BFINTGCE + BFPARASP
 '
 
-fit_A <- sem(model_A, data = peer,
+fit_A <- lavaan::sem(model_A, data = peer,
            likelihood = "wishart")
 summary(fit_A, standardized=TRUE,rsquare=T)
 

@@ -1,3 +1,5 @@
+
+##### Modified Model for Performance and Satisfaction
 library(lavaan)
 
 bagizzi <- readLines("~/Downloads/Examples-note4/Bagizzi.DAT")
@@ -25,9 +27,8 @@ model_A <- '
  '
 fit_A <- lavaan::sem(model_A, sample.cov = corrmat, sample.nobs = 122,
            likelihood = "wishart")
-summary(fit_A, standardized=TRUE,rsquare=T)
+summary(fit_A, standardized=TRUE,rsquare=T,fit.measures=T)
 
-lavInspect(fit_A, "cov.ov")
 
 ######## BagozziB
 
