@@ -14,9 +14,9 @@ modelA <- '
 
 '
 fit_A <- lavaan::cfa(modelA,data = union,likelihood = "wishart")
-summary(fit_A, rsquare = T)
+summary(fit_A, fit.measures = T, rsquare = T)
 
-####### Union B: the same as Union A 
+####### Union B: the same as Union A, but using different data form
 
 
 
