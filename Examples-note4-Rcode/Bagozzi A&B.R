@@ -2,7 +2,8 @@
 ##### Modified Model for Performance and Satisfaction
 library(lavaan)
 
-bagizzi <- readLines("~/Downloads/Examples-note4/Bagizzi.DAT")
+urlfile="https://raw.github.com/nyj933/SEM_Rcode/main/Examples-note4-Rcode/Bagizzi.DAT"
+bagizzi <- readLines(urlfile)
 lower_corr <- bagizzi[1:8]
 corrmat <- getCov(lower_corr,names = c("PERFORMM", "JBSATIS1", "JBSATIS2", 
                                        "ACHMOT1", "ACHMOT2", 
