@@ -2,8 +2,8 @@
 ### Estimating MTMM model by Diagonally Weighted Least Squares
 
 library(lavaan)
-leader1 <- read.csv("~/Downloads/Examples-note4/leader1.txt",sep = "")
-
+urlfile="https://raw.github.com/nyj933/SEM_Rcode/main/Examples-note4-Rcode/leader1.txt"
+leader1 <- read.csv(urlfile,sep = "")
 
 ###### leader 2 
 
