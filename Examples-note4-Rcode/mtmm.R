@@ -4,7 +4,8 @@ cor2cov <- function(R, S) {
   sweep(sweep(R, 1, S, "*"), 2, S, "*")
 }
 
-mtmm <- readLines("~/Downloads/Examples-note4/mtmm.cm")
+urlfile="https://raw.github.com/nyj933/SEM_Rcode/main/Examples-note4-Rcode/mtmm.cm"
+mtmm <- readLines(urlfile)
 std <- c(3.61, 3.66, 3.59, 2.94, 3.03, 2.85, 2.22, 2.42, 2.04)
 
 cormat <- getCov(mtmm[c(1:9)],names = c("PARI", "SZTI", "SZDI", "PARC", 
