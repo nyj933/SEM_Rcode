@@ -1,7 +1,9 @@
 
 ##### longitudinalA: 
 library(lavaan)
-dat = readLines("~/Downloads/Examples-note6/longitudinal.COR")
+library(readr)
+urlfile="https://raw.github.com/nyj933/SEM_Rcode/main/Examples-note6-Rcode/longitudinal.COR"
+dat = read_lines(urlfile)
 
 cormat = getCov(dat[1:12], names = c("MATH9", "SCI9", "SS9", "READ9",
                                      "SCATV9", "SCATQ9", "MATH7", "SCI7",
