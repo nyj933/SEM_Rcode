@@ -1,5 +1,6 @@
 library(lavaan)
-psavar = read.csv("~/Downloads/Examples-note6/psavar.csv")
+urlfile="https://raw.github.com/nyj933/SEM_Rcode/main/Examples-note6-Rcode/psavar.csv"
+psavar = read.csv(urlfile)
 psavar = psavar[,c(1:6)]
 
 psavar[psavar==-9] = NA
