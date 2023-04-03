@@ -1,7 +1,8 @@
 library("lavaan")
 library("tidyverse")
 
-npv <- read.csv("~/Downloads/Note2/npv.csv")
+urlfile="https://raw.github.com/nyj933/SEM_Rcode/main/Examples-note3-Rcode/npv.csv"
+npv <- read.csv(urlfile)
 npv <- npv[,c(1:9)]
 
 colnames(npv)
