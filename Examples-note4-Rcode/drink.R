@@ -4,7 +4,8 @@
 library(lavaan)
 library(tidyverse)
 
-drink <- read.csv("~/Downloads/Examples-note4/drinkdata.csv")
+urlfile="https://raw.github.com/nyj933/SEM_Rcode/main/Examples-note4-Rcode/drinkdata.csv"
+drink <- read.csv(urlfile)
 drink <- drink[,c(1:16)]
 drink_std <- drink %>% mutate_at(colnames(drink), ~(scale(.) %>% as.vector))
 
