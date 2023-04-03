@@ -1,3 +1,4 @@
+#install.packages("poLCA")
 library(poLCA)
 ##
 ## Replication of latent class models in Dayton (1998)
