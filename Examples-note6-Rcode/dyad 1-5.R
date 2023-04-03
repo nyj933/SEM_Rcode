@@ -1,5 +1,6 @@
 library(lavaan)
-dyad = read.csv("~/Downloads/Examples-note6/DYAD.csv")
+urlfile="https://raw.github.com/nyj933/SEM_Rcode/main/Examples-note6-Rcode/DYAD.csv"
+dyad = read.csv(urlfile)
 dyad = dyad[,c(1:10)]
 dyad[dyad==-9] = NA
 
