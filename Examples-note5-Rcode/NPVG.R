@@ -1,5 +1,8 @@
 library(lavaan)
-npvg = read_lines("~/Downloads/Examples-note5/NPVG(R).dat")
+library(readr)
+
+urlfile="https://raw.github.com/nyj933/SEM_Rcode/main/Examples-note5-Rcode/NPVG(R).DAT"
+npvg = read_lines(urlfile)
 
 readCorrMatrix <- function(data){
   j=0
