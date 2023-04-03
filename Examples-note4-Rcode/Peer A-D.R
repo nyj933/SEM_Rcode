@@ -1,7 +1,8 @@
 library(lavaan)
 library(tidyverse)
 
-peer <- read.csv("~/Downloads/Note3/peerinfluences.csv")
+urlfile="https://raw.github.com/nyj933/SEM_Rcode/main/Examples-note4-Rcode/peerinfluences.csv"
+peer <- read.csv(urlfile)
 peer <- peer[,c(1:10)]
 
 ######## PeersA
