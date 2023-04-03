@@ -3,7 +3,8 @@
 library(lavaan)
 library(tidyverse)
 
-dat <- read.csv("~/Desktop/humphreys.csv")
+urlfile="https://raw.github.com/nyj933/SEM_Rcode/main/Examples-note6-Rcode/humphreys.csv"
+dat = read.csv(urlfile)
 dat <- dat[,1:10]
 
 model <- ' 
